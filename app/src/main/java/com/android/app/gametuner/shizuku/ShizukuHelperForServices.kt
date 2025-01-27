@@ -22,7 +22,7 @@ object ShizukuHelperForServices {
                 }
             }
 
-            val exitCode = process.waitFor()
+            process.waitFor()
         } catch (e: Exception) {
             // Do nothing, no logging
         }

@@ -7,10 +7,13 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import androidx.core.app.NotificationCompat
 import com.android.app.gametuner.R
 import com.android.app.gametuner.StateStorage
+import com.android.app.gametuner.shizuku.ShizukuHelperForServices
 
 class MemoryCleanerService : Service() {
     private val channelId = "memory_cleaner_service_channel"
@@ -19,6 +22,26 @@ class MemoryCleanerService : Service() {
 
     // Initialize StateStorage with application context
     private val stateStorage by lazy { StateStorage(applicationContext) }
+
+    // Use the Handler with Looper.getMainLooper()
+    private val handler = Handler(Looper.getMainLooper())
+    private val delay: Long = 10000
+
+    // Essentials
+    private lateinit var selectedPackageName: String
+    private lateinit var excludedPackages: List<String>
+    private lateinit var command: String
+
+    // Runnable that will repeatedly execute the termination command
+    private val memoryCleanerRunnable = object : Runnable {
+        override fun run() {
+            // Execute the shell command via ShizukuHelperForServices
+            ShizukuHelperForServices.executeShellCommands(command)
+
+            // Schedule the next execution
+            handler.postDelayed(this, delay)
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -34,10 +57,19 @@ class MemoryCleanerService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         // Retrieve the package name passed via the intent
-        val selectedPackageName = intent?.getStringExtra("selectedPackageName") ?: ""
+        selectedPackageName = intent?.getStringExtra("selectedPackageName") ?: ""
+
+        // Declare the exclusion list once here
+        excludedPackages = listOf(selectedPackageName, packageName)
+
+        // Build the command once
+        command = buildShellCommand(excludedPackages)
 
         val notification = createServiceNotification()
         startForeground(notificationId, notification)
+
+        // Start periodic execution of the memory cleaner
+        handler.post(memoryCleanerRunnable)
 
         return START_STICKY
     }
@@ -50,6 +82,13 @@ class MemoryCleanerService : Service() {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setOngoing(true) // Keeps the notification ongoing
             .build()
+    }
+
+    private fun buildShellCommand(excludedPackages: List<String>): String {
+        // Build the command to force-stop apps excluding the selected game package and the GameTuner app
+        // `am force-stop` stops the app, but excludes the selected package and GameTuner app
+        val excludedPackagesPattern = excludedPackages.joinToString(" | grep -v ") { it }
+        return "pm list packages | grep -vE '$excludedPackagesPattern' | awk -F: '{print \$2}' | xargs -r am force-stop"
     }
 
     override fun onBind(intent: Intent?): IBinder? {
