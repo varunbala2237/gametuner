@@ -3,7 +3,7 @@ package com.android.app.gametuner.settings
 import com.android.app.gametuner.shizuku.ShizukuHelper
 
 // Resolution and DPI Setting
-fun handleApplySettingsToggle(isChecked: Boolean, resolutionList: List<String>) {
+fun applyResolution(isChecked: Boolean, resolutionList: List<String>) {
     val resolution = resolutionList.getOrNull(0)
     val revertResolution = resolutionList.getOrNull(1)
     val dpi = resolutionList.getOrNull(2)
@@ -21,16 +21,10 @@ fun handleApplySettingsToggle(isChecked: Boolean, resolutionList: List<String>) 
         )
     }
 
-    if (resolution!!.isNotEmpty() && dpi!!.isNotEmpty()) {
-        // Execute the commands through ShizukuHelper
-        commands.forEach { command ->
-            ShizukuHelper.executeShellCommandWithShizuku(
-                command = command,
-                logMessages = listOf(
-                    "Attempting to apply: $command",
-                    "Ensure the command runs successfully."
-                )
-            )
-        }
+    // Execute the commands through ShizukuHelper
+    commands.forEach { command ->
+        ShizukuHelper.executeShellCommandWithShizuku(
+            command = command
+        )
     }
 }

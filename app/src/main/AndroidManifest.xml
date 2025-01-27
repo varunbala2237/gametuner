@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="moe.shizuku.manager.permission.SHIZUKU" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
     <application
         android:allowBackup="true"
@@ -32,6 +34,11 @@
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
+
+        <service
+            android:name=".services.MemoryCleanerService"
+            android:permission="android.permission.FOREGROUND_SERVICE"
+            android:foregroundServiceType="dataSync" />
     </application>
 
     <queries>

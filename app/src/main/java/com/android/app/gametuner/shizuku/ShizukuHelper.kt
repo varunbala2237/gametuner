@@ -49,7 +49,7 @@ object ShizukuHelper {
         return checkPermission(requestPermissionCode)
     }
 
-    fun executeShellCommandWithShizuku(command: String, logMessages: List<String>) {
+    fun executeShellCommandWithShizuku(command: String) {
         if (!checkPermission(requestPermissionCode)) {
             GlobalLogsManager.addLog("Shizuku permission not granted: Please grant permission and try again.")
             return

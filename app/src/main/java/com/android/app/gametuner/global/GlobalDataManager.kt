@@ -1,9 +1,11 @@
 package com.android.app.gametuner.global
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 
 object GlobalDataManager {
+    // To track selected game as a live manager (MutableState to allow observation)
+    private val selectedGame = mutableStateOf<String>("")
+
     // To track the apply settings switch state
     private val isApplySettingsEnabled = mutableStateOf(false)
 
@@ -12,6 +14,16 @@ object GlobalDataManager {
 
     // To track the memory cleaner switch state
     private val isMemoryCleanerEnabled = mutableStateOf(false)
+
+    // Function to update the selected game
+    fun setSelectedGame(gamePackageName: String) {
+        selectedGame.value = gamePackageName
+    }
+
+    // Function to get the current selected game package name
+    fun getSelectedGame(): String {
+        return selectedGame.value
+    }
 
     // Function to update the switch state
     fun setApplySettingsState(isEnabled: Boolean) {

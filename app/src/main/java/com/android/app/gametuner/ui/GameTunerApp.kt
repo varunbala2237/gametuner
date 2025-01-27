@@ -54,6 +54,7 @@ fun GameTunerApp() {
         // If no game is selected (selectedGamePackage is null), select the first game
         if (selectedGamePackage.value.isEmpty() && installedGames.value.isNotEmpty()) {
             selectedGamePackage.value = installedGames.value.first().packageName
+
             // Update stateStorage with the first selected game package
             stateStorage.saveGameContentStates(
                 StateStorage.GameContentStates(
@@ -74,6 +75,10 @@ fun GameTunerApp() {
                 gameScrollState = gameScrollState.value // Save both selected game and scroll state
             )
         )
+
+        // Update the selected game in GlobalDataManager
+        GlobalDataManager.setSelectedGame(selectedGamePackage.value)
+
         // Log the selected game and scroll state for debugging
         GlobalLogsManager.addLog("Saved/Restored selected game: ${selectedGamePackage.value}")
         GlobalLogsManager.addLog("Saved/Restored scroll state: ${gameScrollState.value}")

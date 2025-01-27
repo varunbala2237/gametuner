@@ -37,7 +37,14 @@ fun MemoryCleanerSection() {
     val applySettingsEnabled = GlobalDataManager.getApplySettingsState()
 
     // Retrieve the saved memory state
-    val savedMemoryCleanerSwitchState = rememberSaveable { mutableStateOf(stateStorage.getMemoryCleanerSwitchState()) }
+    val memoryCleanerSwitchState = rememberSaveable { mutableStateOf(stateStorage.getMemoryCleanerSwitchState()) }
+
+    LaunchedEffect(memoryCleanerSwitchState.value) {
+        // Update the values in GlobalDataManager and stateStorage
+        stateStorage.saveMemoryCleanerSwitchState(memoryCleanerSwitchState.value)
+        GlobalDataManager.setMemoryCleanerState(memoryCleanerSwitchState.value)
+        GlobalLogsManager.addLog("Restored/Saved Memory Cleaner Switch state: ${memoryCleanerSwitchState.value}")
+    }
 
     Row(
         modifier = Modifier
@@ -77,15 +84,11 @@ fun MemoryCleanerSection() {
         }
 
         Switch(
-            checked = savedMemoryCleanerSwitchState.value,
+            checked = memoryCleanerSwitchState.value,
             onCheckedChange = { isChecked ->
-                savedMemoryCleanerSwitchState.value = isChecked
-
-                // Update the values in GlobalDataManager and stateStorage
-                stateStorage.saveMemoryCleanerSwitchState(isChecked)
-                GlobalDataManager.setMemoryCleanerState(isChecked)
-                GlobalLogsManager.addLog("Restored/Saved Memory Cleaner Switch state: ${savedMemoryCleanerSwitchState.value}")
-            }
+                memoryCleanerSwitchState.value = isChecked
+            },
+            enabled = !applySettingsEnabled
         )
     }
 }
