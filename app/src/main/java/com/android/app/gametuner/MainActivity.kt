@@ -4,6 +4,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,8 +28,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Add the permission result listener
-        Shizuku.addRequestPermissionResultListener(requestPermissionResultListener)
+        try {
+            // Add the permission result listener
+            Shizuku.addRequestPermissionResultListener(requestPermissionResultListener)
+        } catch (e: Exception) {
+            // Show Toast if Shizuku is not ready
+            Toast.makeText(this, "Shizuku is not ready", Toast.LENGTH_LONG).show()
+            // Auto-close the app
+            finish()
+            return
+        }
 
         setContent {
             GameTunerTheme {
@@ -52,6 +61,7 @@ class MainActivity : ComponentActivity() {
 
     fun getInstalledGames(): List<PackageInfo> {
         val packageManager = packageManager
+        @Suppress("WARNINGS")
         return packageManager.getInstalledPackages(PackageManager.GET_META_DATA).filter { pkgInfo ->
             val appInfo = pkgInfo.applicationInfo
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
