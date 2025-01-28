@@ -22,11 +22,6 @@ class MainActivity : ComponentActivity() {
     private val requestPermissionResultListener =
         Shizuku.OnRequestPermissionResultListener { requestCode, grantResult ->
             val granted = grantResult == PackageManager.PERMISSION_GRANTED
-
-            if (granted) {
-                // Store the code
-                requestPermissionCode = requestCode
-            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
