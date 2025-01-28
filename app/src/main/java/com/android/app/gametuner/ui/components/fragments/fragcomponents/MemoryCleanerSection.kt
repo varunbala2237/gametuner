@@ -1,5 +1,7 @@
 package com.android.app.gametuner.ui.components.fragments.fragcomponents
 
+import android.os.Build
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,6 +34,9 @@ import com.android.app.gametuner.global.GlobalLogsManager
 fun MemoryCleanerSection() {
     val context = LocalMainActivity.current
     val stateStorage = remember { StateStorage(context) }
+
+    // Check if the device is running Android 10 or above
+    val isAndroid10OrAbove = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
 
     // Access the global apply settings switch state
     val applySettingsEnabled = GlobalDataManager.getApplySettingsState()
@@ -77,7 +82,7 @@ fun MemoryCleanerSection() {
                 style = MaterialTheme.typography.bodyLarge
             )
             Text(
-                text = "Enable this option to periodically free RAM resources",
+                text = "Enable this option to periodically free RAM resources. Works only on Android 10+.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
             )
@@ -86,7 +91,12 @@ fun MemoryCleanerSection() {
         Switch(
             checked = memoryCleanerSwitchState.value,
             onCheckedChange = { isChecked ->
-                memoryCleanerSwitchState.value = isChecked
+                if (isAndroid10OrAbove) {
+                    memoryCleanerSwitchState.value = isChecked
+                } else {
+                    // Disable the switch if Android version is below 10
+                    Toast.makeText(context, "RAM Cleaner requires Android 10 or above", Toast.LENGTH_LONG).show()
+                }
             },
             enabled = !applySettingsEnabled
         )
