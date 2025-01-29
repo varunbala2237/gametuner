@@ -15,7 +15,6 @@ class StateStorage(context: Context) {
         private const val APPLY_SETTINGS_SWITCH_STATE_KEY = "apply_settings_switch_state"
         private const val SELECTED_RESOLUTION_KEY = "selected_resolution"
         private const val SELECTED_MEMORY_CLEANER_STATE_KEY = "selected_memory_cleaner"
-        private const val SELECTED_DEVICE_PROFILE_STATE_KEY = "selected_thermal_profile"
     }
 
     // Data class to hold both content and state, including the gameScrollState as Int
@@ -88,26 +87,5 @@ class StateStorage(context: Context) {
     // Get memory cleaner switch state
     fun getMemoryCleanerSwitchState(): Boolean {
         return sharedPreferences.getBoolean(SELECTED_MEMORY_CLEANER_STATE_KEY, false)
-    }
-
-    // Save device profile as a list
-    fun saveDeviceProfile(deviceProfileList: List<String>) {
-        val json = gson.toJson(deviceProfileList)  // Convert the list to JSON string
-        sharedPreferences.edit().putString(SELECTED_DEVICE_PROFILE_STATE_KEY, json).apply()
-    }
-
-    // Get device profile as a list
-    fun getDeviceProfile(): List<String> {
-        val deviceProfileList = sharedPreferences.getString(SELECTED_DEVICE_PROFILE_STATE_KEY, null)
-
-        if (deviceProfileList == null) {
-            // Initialize with default values if no saved thermal profile is found
-            val defaultDeviceProfile = listOf("interactive")
-            saveDeviceProfile(defaultDeviceProfile)
-            return defaultDeviceProfile
-        }
-
-        val type = object : TypeToken<List<String>>() {}.type
-        return gson.fromJson(deviceProfileList, type)  // Deserialize the JSON string back into a List
     }
 }

@@ -3,7 +3,6 @@ package com.android.app.gametuner.ui.components.fragments
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import com.android.app.gametuner.ui.components.fragments.fragcomponents.DeviceProfileSection
 import com.android.app.gametuner.ui.components.fragments.fragcomponents.DisplaySettingsSection
 import com.android.app.gametuner.ui.components.fragments.fragcomponents.ForceRenderingSection
 import com.android.app.gametuner.ui.components.fragments.fragcomponents.MemoryCleanerSection
@@ -21,9 +20,6 @@ fun DeviceFragment(modifier: Modifier = Modifier) {
 
         // RAM cleaner
         MemoryCleanerSection()
-
-        // Thermal Profile
-        DeviceProfileSection()
 
         // Force GPU Rendering
         ForceRenderingSection()
