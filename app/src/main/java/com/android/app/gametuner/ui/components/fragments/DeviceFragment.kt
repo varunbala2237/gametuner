@@ -6,7 +6,6 @@ import androidx.compose.ui.Modifier
 import com.android.app.gametuner.ui.components.fragments.fragcomponents.DisplaySettingsSection
 import com.android.app.gametuner.ui.components.fragments.fragcomponents.ForceRenderingSection
 import com.android.app.gametuner.ui.components.fragments.fragcomponents.MemoryCleanerSection
-import com.android.app.gametuner.ui.components.fragments.fragcomponents.VulkanSettingSection
 
 @androidx.compose.runtime.Composable
 fun DeviceFragment(modifier: Modifier = Modifier) {
@@ -23,8 +22,5 @@ fun DeviceFragment(modifier: Modifier = Modifier) {
 
         // Force GPU Rendering
         ForceRenderingSection()
-
-        // Vulkan API
-        VulkanSettingSection()
     }
 }
