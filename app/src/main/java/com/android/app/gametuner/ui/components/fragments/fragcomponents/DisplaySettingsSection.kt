@@ -57,8 +57,8 @@ fun DisplaySettingsSection() {
     // initialize only resolution in dropdown content from stateStorage
     var selectedResolution by remember {
         mutableStateOf(
-            if (savedResolutionList.firstOrNull() == "") "Default"
-            else savedResolutionList.firstOrNull() ?: ""
+            if (savedResolutionList.first() == "reset") "Default"
+            else savedResolutionList.first()
         )
     }
 
@@ -103,16 +103,17 @@ fun DisplaySettingsSection() {
                 onClick = { expanded = !expanded },
                 enabled = !applySettingsEnabled
             ) {
-                Text(
-                    text = selectedResolution,
-                    style = MaterialTheme.typography.bodyMedium
-                )
+                selectedResolution?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
             }
 
             DropdownMenu(
                 expanded = expanded,
-                onDismissRequest = { expanded = false },
-                modifier = Modifier.background(MaterialTheme.colorScheme.surface)
+                onDismissRequest = { expanded = false }
             ) {
                 resolutionsWithDpi.forEach { (resolution, dpi) ->
                     DropdownMenuItem(
@@ -120,11 +121,11 @@ fun DisplaySettingsSection() {
                             selectedResolution = resolution
                             // Save the selected resolution and DPI to the global data manager
                             GlobalDataManager.setSelectedResolutionList(
-                                if (resolution == "Default") listOf("", "reset", "", "reset") else listOf(resolution, "reset", dpi, "reset")
+                                if (resolution == "Default") listOf("reset", "reset") else listOf(resolution, dpi)
                             )
                             // Save the resolution to StateStorage
                             stateStorage.saveResolution(
-                                if (resolution == "Default") listOf("", "reset", "", "reset") else listOf(resolution, "reset", dpi, "reset")
+                                if (resolution == "Default") listOf("reset", "reset") else listOf(resolution, dpi)
                             )
                             expanded = false
                         },

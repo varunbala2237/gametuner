@@ -1,15 +1,12 @@
 package com.android.app.gametuner.ui.components.fragments
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.android.app.gametuner.ui.components.fragments.fragcomponents.DeviceProfileSection
 import com.android.app.gametuner.ui.components.fragments.fragcomponents.DisplaySettingsSection
 import com.android.app.gametuner.ui.components.fragments.fragcomponents.ForceRenderingSection
 import com.android.app.gametuner.ui.components.fragments.fragcomponents.MemoryCleanerSection
-import com.android.app.gametuner.ui.components.fragments.fragcomponents.ThermalProfileSection
 import com.android.app.gametuner.ui.components.fragments.fragcomponents.VulkanSettingSection
 
 @androidx.compose.runtime.Composable
@@ -26,7 +23,7 @@ fun DeviceFragment(modifier: Modifier = Modifier) {
         MemoryCleanerSection()
 
         // Thermal Profile
-        ThermalProfileSection()
+        DeviceProfileSection()
 
         // Force GPU Rendering
         ForceRenderingSection()

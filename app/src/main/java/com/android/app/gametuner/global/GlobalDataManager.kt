@@ -9,11 +9,14 @@ object GlobalDataManager {
     // To track the apply settings switch state
     private val isApplySettingsEnabled = mutableStateOf(false)
 
-    // To track the selected resolution (as a list: [resolution, "reset"])
+    // To track the selected resolution
     private val selectedResolutionList = mutableStateOf<List<String>>(emptyList())
 
     // To track the memory cleaner switch state
     private val isMemoryCleanerEnabled = mutableStateOf(false)
+
+    // To track the selected thermal profile
+    private val selectedDeviceProfile = mutableStateOf<List<String>>(emptyList())
 
     // Function to update the selected game
     fun setSelectedGame(gamePackageName: String) {
@@ -53,5 +56,15 @@ object GlobalDataManager {
     // Function to get the current state of the switch
     fun getMemoryCleanerState(): Boolean {
         return isMemoryCleanerEnabled.value
+    }
+
+    // Function to save the device profile list
+    fun setSelectedDeviceProfileList(deviceProfileList: List<String>) {
+        selectedDeviceProfile.value = deviceProfileList
+    }
+
+    // Function to get the device profile list
+    fun getSelectedDeviceProfileList(): List<String> {
+        return selectedDeviceProfile.value
     }
 }

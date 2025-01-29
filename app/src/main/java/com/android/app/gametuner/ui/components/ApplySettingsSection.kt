@@ -1,6 +1,5 @@
 package com.android.app.gametuner.ui.components
 
-import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -30,7 +29,7 @@ import com.android.app.gametuner.LocalMainActivity
 import com.android.app.gametuner.StateStorage
 import com.android.app.gametuner.global.GlobalDataManager
 import com.android.app.gametuner.global.GlobalLogsManager
-import com.android.app.gametuner.services.MemoryCleanerService
+import com.android.app.gametuner.settings.applyDeviceProfile
 import com.android.app.gametuner.settings.applyMemoryCleaner
 import com.android.app.gametuner.settings.applyResolution
 import com.android.app.gametuner.shizuku.ShizukuHelper
@@ -47,14 +46,14 @@ fun ApplySettingsSection(
     // Determine if in light or dark mode
     val isDarkMode = isSystemInDarkTheme()
 
-    // Retrieve the selectedGame from GlobalDataManager
-
-
     // Retrieve the resolution list from GlobalDataManager
     val resolutionList = GlobalDataManager.getSelectedResolutionList()
 
     // Retrieve the memory cleaner state from GlobalDataManager
     val isMemoryCleanerEnabled = GlobalDataManager.getMemoryCleanerState()
+
+    // Retrieve the device profile list state from GlobalDataManager
+    val deviceProfileList = GlobalDataManager.getSelectedDeviceProfileList()
 
     // Live check for Shizuku permission and installation
     LaunchedEffect(Unit) {
@@ -140,6 +139,12 @@ fun ApplySettingsSection(
                                 context = context,
                                 isChecked = isChecked,
                                 isMemoryCleanerEnabled = isMemoryCleanerEnabled
+                            )
+
+                            // Apply device profile
+                            applyDeviceProfile(
+                                isChecked = isChecked,
+                                deviceProfileList = deviceProfileList
                             )
                         }
                     }
