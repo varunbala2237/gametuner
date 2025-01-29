@@ -1,4 +1,4 @@
-package com.android.app.gametuner.settings
+package com.android.app.gametuner.ui.utils
 
 import android.content.Context
 import android.os.Build

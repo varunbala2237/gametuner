@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.android.app.gametuner.global.GlobalDataManager
 import com.android.app.gametuner.LocalMainActivity
 import com.android.app.gametuner.StateStorage
-import com.android.app.gametuner.settings.getDeviceResolution
+import com.android.app.gametuner.ui.utils.getDeviceResolution
 
 @androidx.compose.runtime.Composable
 fun DisplaySettingsSection() {
