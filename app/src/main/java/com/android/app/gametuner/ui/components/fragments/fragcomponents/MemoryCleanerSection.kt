@@ -86,7 +86,7 @@ fun MemoryCleanerSection() {
                 style = MaterialTheme.typography.bodyLarge
             )
             Text(
-                text = "Enable this option to periodically free RAM resources. Works only on Android 10+.",
+                text = "Enable this option to free RAM resources in background",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
             )
