@@ -15,6 +15,9 @@ object GlobalDataManager {
     // To track the memory cleaner switch state
     private val isMemoryCleanerEnabled = mutableStateOf(false)
 
+    // To track the force gpu rendering switch state
+    private val isForceGpuRenderingEnabled = mutableStateOf(false)
+
     // Function to update the selected game
     fun setSelectedGame(gamePackageName: String) {
         selectedGame.value = gamePackageName
@@ -53,5 +56,15 @@ object GlobalDataManager {
     // Function to get the current state of the switch
     fun getMemoryCleanerState(): Boolean {
         return isMemoryCleanerEnabled.value
+    }
+
+    // Function to update the switch state
+    fun setForceGpuRendering(isEnabled: Boolean) {
+        isForceGpuRenderingEnabled.value = isEnabled
+    }
+
+    // Function to get the current state of the switch
+    fun getForceGpuRendering(): Boolean {
+        return isForceGpuRenderingEnabled.value
     }
 }

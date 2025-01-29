@@ -29,6 +29,7 @@ import com.android.app.gametuner.LocalMainActivity
 import com.android.app.gametuner.StateStorage
 import com.android.app.gametuner.global.GlobalDataManager
 import com.android.app.gametuner.global.GlobalLogsManager
+import com.android.app.gametuner.settings.applyForceGpuRendering
 import com.android.app.gametuner.settings.applyMemoryCleaner
 import com.android.app.gametuner.settings.applyResolution
 import com.android.app.gametuner.shizuku.ShizukuHelper
@@ -50,6 +51,9 @@ fun ApplySettingsSection(
 
     // Retrieve the memory cleaner state from GlobalDataManager
     val isMemoryCleanerEnabled = GlobalDataManager.getMemoryCleanerState()
+
+    // Retrieve the force gpu rendering switch state from GlobalDataManager
+    val isForceGpuRenderingEnabled = GlobalDataManager.getMemoryCleanerState()
 
     // Live check for Shizuku permission and installation
     LaunchedEffect(Unit) {
@@ -135,6 +139,11 @@ fun ApplySettingsSection(
                                 context = context,
                                 isChecked = isChecked,
                                 isMemoryCleanerEnabled = isMemoryCleanerEnabled
+                            )
+
+                            applyForceGpuRendering(
+                                isChecked = isChecked,
+                                isForceGpuRenderingEnabled = isForceGpuRenderingEnabled
                             )
                         }
                     }
