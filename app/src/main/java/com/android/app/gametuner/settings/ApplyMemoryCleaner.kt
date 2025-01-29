@@ -19,7 +19,7 @@ fun applyMemoryCleaner(context: Context, isChecked: Boolean, isMemoryCleanerEnab
         if (isChecked) {
             // Start the service
             context.startService(serviceIntent)
-            GlobalLogsManager.addLog("RAM Cleaner Service starting with package: $selectedPackage")
+            GlobalLogsManager.addLog("Memory Cleaner Service starting with package: $selectedPackage")
         } else {
             // Stop the service
             context.stopService(serviceIntent)

@@ -9,10 +9,10 @@ import androidx.compose.ui.unit.sp
 import com.android.app.gametuner.R
 
 // Define the Poppins font family
-val Poppins = FontFamily(
-    Font(R.font.poppins_regular, FontWeight.Normal),
-    Font(R.font.poppins_medium, FontWeight.Medium),
-    Font(R.font.poppins_bold, FontWeight.Bold)
+val GoogleSans = FontFamily(
+    Font(R.font.googlesans_regular, FontWeight.Normal),
+    Font(R.font.googlesans_medium, FontWeight.Medium),
+    Font(R.font.googlesans_bold, FontWeight.Bold)
 )
 
 // Define the Monospace font family
@@ -29,51 +29,51 @@ val logTextStyle = TextStyle(
 val Typography = Typography(
     // Body text styles
     bodyLarge = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = GoogleSans,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     ),
     bodyMedium = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = GoogleSans,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp
     ),
     bodySmall = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = GoogleSans,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp
     ),
 
     // Title and heading styles
     titleLarge = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = GoogleSans,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp
     ),
     titleMedium = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = GoogleSans,
         fontWeight = FontWeight.Medium,
         fontSize = 18.sp
     ),
     titleSmall = TextStyle(
-        fontFamily = Poppins,
+        fontFamily =GoogleSans,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     ),
 
     // Display text (headings)
     displayLarge = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = GoogleSans,
         fontWeight = FontWeight.Bold,
         fontSize = 34.sp
     ),
     displayMedium = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = GoogleSans,
         fontWeight = FontWeight.Bold,
         fontSize = 28.sp
     ),
     displaySmall = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = GoogleSans,
         fontWeight = FontWeight.Bold,
         fontSize = 22.sp
     ),

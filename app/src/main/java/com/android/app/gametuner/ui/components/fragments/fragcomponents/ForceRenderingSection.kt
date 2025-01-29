@@ -34,7 +34,7 @@ fun ForceRenderingSection() {
     ) {
         Box(
             modifier = Modifier
-                .size(32.dp)
+                .size(48.dp)
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.primary),
             contentAlignment = Alignment.Center
@@ -54,11 +54,6 @@ fun ForceRenderingSection() {
             Text(
                 text = "Force GPU Rendering",
                 style = MaterialTheme.typography.bodyLarge
-            )
-            Text(
-                text = "Enable this option to force GPU throttling",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
             )
         }
     }

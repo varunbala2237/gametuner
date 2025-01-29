@@ -74,7 +74,7 @@ fun ApplySettingsSection(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(18.dp))
+            .clip(RoundedCornerShape(24.dp))
             .background(
                 color = if (isDarkMode)
                     lightenSurfaceColor(MaterialTheme.colorScheme.surface)
@@ -91,7 +91,7 @@ fun ApplySettingsSection(
         ) {
             Box(
                 modifier = Modifier
-                    .size(32.dp)
+                    .size(48.dp)
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.primary),
                 contentAlignment = Alignment.Center
@@ -111,11 +111,6 @@ fun ApplySettingsSection(
                 Text(
                     text = "Apply Settings",
                     style = MaterialTheme.typography.bodyLarge
-                )
-                Text(
-                    text = "Enable or disable selected settings",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
                 )
             }
 

@@ -21,19 +21,15 @@ fun DeviceFragment(modifier: Modifier = Modifier) {
     ) {
         // Display resolution settings
         DisplaySettingsSection()
-        Spacer(modifier = Modifier.height(16.dp))
 
         // RAM cleaner
         MemoryCleanerSection()
-        Spacer(modifier = Modifier.height(16.dp))
 
         // Thermal Profile
         ThermalProfileSection()
-        Spacer(modifier = Modifier.height(16.dp))
 
         // Force GPU Rendering
         ForceRenderingSection()
-        Spacer(modifier = Modifier.height(16.dp))
 
         // Vulkan API
         VulkanSettingSection()

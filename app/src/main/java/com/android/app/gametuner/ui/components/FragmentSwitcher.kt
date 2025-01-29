@@ -52,7 +52,7 @@ fun FragmentSwitcher() {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .clip(RoundedCornerShape(18.dp))
+            .clip(RoundedCornerShape(24.dp))
             .background(
                 color = if (isDarkMode)
                     lightenSurfaceColor(MaterialTheme.colorScheme.surface)

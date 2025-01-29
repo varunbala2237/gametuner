@@ -112,7 +112,7 @@ class MemoryCleanerService : Service() {
     private fun createServiceNotification(): Notification {
         return NotificationCompat.Builder(this, channelId)
             .setContentTitle("Running Services")
-            .setContentText("RAM Cleaner")
+            .setContentText("Memory Cleaner")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setOngoing(true) // Keeps the notification ongoing

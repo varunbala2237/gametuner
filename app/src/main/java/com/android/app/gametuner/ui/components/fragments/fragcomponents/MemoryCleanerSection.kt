@@ -64,7 +64,7 @@ fun MemoryCleanerSection() {
     ) {
         Box(
             modifier = Modifier
-                .size(32.dp)
+                .size(48.dp)
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.primary),
             contentAlignment = Alignment.Center
@@ -82,13 +82,8 @@ fun MemoryCleanerSection() {
                 .padding(horizontal = 16.dp)
         ) {
             Text(
-                text = "RAM Cleaner",
+                text = "Memory Cleaner",
                 style = MaterialTheme.typography.bodyLarge
-            )
-            Text(
-                text = "Enable this option to free RAM resources in background",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
             )
         }
 
@@ -101,12 +96,12 @@ fun MemoryCleanerSection() {
                         memoryCleanerSwitchState.value = isChecked
                     } else {
                         // Inform the user to grant permission
-                        Toast.makeText(context, "Please enable Usage Access to use RAM Cleaner", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Please enable Usage Access to use Memory Cleaner", Toast.LENGTH_LONG).show()
                         guideUserToSettings(context) // Guide the user to the settings page
                     }
                 } else {
                     // Disable the switch if Android version is below 10
-                    Toast.makeText(context, "RAM Cleaner requires Android 10 or above", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Memory Cleaner requires Android 10 or above", Toast.LENGTH_LONG).show()
                 }
             },
             enabled = !applySettingsEnabled

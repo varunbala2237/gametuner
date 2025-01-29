@@ -31,7 +31,7 @@ fun PlayButton(selectedGamePackage: MutableState<String>) {
             FloatingActionButton(
                 onClick = { selectedGamePackage.value.let { context.launchGame(it) } },
                 containerColor = MaterialTheme.colorScheme.primary,
-                shape = CircleShape,
+                shape = RoundedCornerShape(24.dp),
                 modifier = Modifier.padding(18.dp)
             ) {
                 Icon(

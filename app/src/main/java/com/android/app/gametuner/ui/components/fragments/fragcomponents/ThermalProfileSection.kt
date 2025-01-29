@@ -34,7 +34,7 @@ fun ThermalProfileSection() {
     ) {
         Box(
             modifier = Modifier
-                .size(32.dp)
+                .size(48.dp)
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.primary),
             contentAlignment = Alignment.Center
@@ -54,11 +54,6 @@ fun ThermalProfileSection() {
             Text(
                 text = "Thermal Profile",
                 style = MaterialTheme.typography.bodyLarge
-            )
-            Text(
-                text = "Select a thermal profile for CPU throttling",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
             )
         }
     }
