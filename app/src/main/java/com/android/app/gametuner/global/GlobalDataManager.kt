@@ -15,6 +15,9 @@ object GlobalDataManager {
     // To track the memory cleaner switch state
     private val isMemoryCleanerEnabled = mutableStateOf(false)
 
+    // To track the max fps switch state
+    private val isMaxFps = mutableStateOf(false)
+
     // To track the force gpu rendering switch state
     private val isForceGpuRenderingEnabled = mutableStateOf(false)
 
@@ -56,6 +59,16 @@ object GlobalDataManager {
     // Function to get the current state of the switch
     fun getMemoryCleanerState(): Boolean {
         return isMemoryCleanerEnabled.value
+    }
+
+    // Function to update the switch state
+    fun setMaxFps(isEnabled: Boolean) {
+        isMaxFps.value = isEnabled
+    }
+
+    // Function to get the current state of the switch
+    fun getMaxFPs(): Boolean {
+        return isMaxFps.value
     }
 
     // Function to update the switch state
