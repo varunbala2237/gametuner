@@ -1,4 +1,4 @@
-package com.android.app.gametuner.shizuku
+package com.android.app.gametuner.ui.components.dialogs
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*

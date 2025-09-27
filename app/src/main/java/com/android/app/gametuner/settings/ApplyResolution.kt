@@ -1,5 +1,6 @@
 package com.android.app.gametuner.settings
 
+import com.android.app.gametuner.global.GlobalLogsManager
 import com.android.app.gametuner.shizuku.ShizukuHelper
 
 // Resolution and DPI Setting
@@ -19,5 +20,6 @@ fun applyResolution(isChecked: Boolean, resolutionList: List<String>) {
                 command = command
             )
         }
+        GlobalLogsManager.addLog("Display resolution applied is: $resolutionList")
     }
 }

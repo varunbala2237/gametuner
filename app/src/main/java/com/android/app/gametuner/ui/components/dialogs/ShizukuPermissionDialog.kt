@@ -1,4 +1,4 @@
-package com.android.app.gametuner.shizuku
+package com.android.app.gametuner.ui.components.dialogs
 
 import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.Column

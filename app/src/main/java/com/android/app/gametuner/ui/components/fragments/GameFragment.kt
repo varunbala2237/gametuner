@@ -21,14 +21,9 @@ import com.android.app.gametuner.ui.components.fragments.sections.DisplaySetting
 
 @androidx.compose.runtime.Composable
 fun GameFragment(modifier: Modifier = Modifier) {
-    val listState = rememberLazyListState() // Scroll state
-    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
-    val logsHeight = screenHeight * 0.38f
-
     Column(
         modifier = modifier
-            .fillMaxWidth()
-            .height(logsHeight)
+            .fillMaxSize()
     ) {
 
         Row(
@@ -43,21 +38,12 @@ fun GameFragment(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        LazyColumn(
-            state = listState,
+        Text(
+            text = "Not implemented yet",
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            item {
-                Text(
-                    text = "Coming soon",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .padding(18.dp)
-                )
-            }
-        }
+                .align(Alignment.CenterHorizontally)
+                .padding(18.dp)
+        )
     }
 }

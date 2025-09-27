@@ -15,20 +15,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import com.android.app.gametuner.ui.components.fragments.sections.BackgroundAppLimitSection
 import com.android.app.gametuner.ui.components.fragments.sections.DisplaySettingsSection
 import com.android.app.gametuner.ui.components.fragments.sections.ForceRenderingSection
 import com.android.app.gametuner.ui.components.fragments.sections.MemoryCleanerSection
 
 @androidx.compose.runtime.Composable
 fun DeviceFragment(modifier: Modifier = Modifier) {
-    val listState = rememberLazyListState() // Scroll state
-    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
-    val logsHeight = screenHeight * 0.38f
-
     Column(
         modifier = modifier
-            .fillMaxWidth()
-            .height(logsHeight)
+            .fillMaxSize()
     ) {
 
         Row(
@@ -43,24 +39,17 @@ fun DeviceFragment(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        LazyColumn(
-            state = listState,
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            item {
-                // Display resolution settings
-                DisplaySettingsSection()
-            }
-            item {
-                // RAM cleaner
-                MemoryCleanerSection()
-            }
-            item {
-                // Force GPU Rendering
-                ForceRenderingSection()
-            }
-        }
+
+        // Display resolution settings
+        DisplaySettingsSection()
+
+        // RAM cleaner
+        MemoryCleanerSection()
+
+        // Background App Limit
+        BackgroundAppLimitSection()
+
+        // Force GPU Rendering
+        ForceRenderingSection()
     }
 }

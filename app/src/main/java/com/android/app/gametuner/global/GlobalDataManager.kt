@@ -15,8 +15,8 @@ object GlobalDataManager {
     // To track the memory cleaner switch state
     private val isMemoryCleanerEnabled = mutableStateOf(false)
 
-    // To track the max fps switch state
-    private val isMaxFps = mutableStateOf(false)
+    // To track the background app limit
+    private val selectedBackgroundAppLimit = mutableStateOf<String>("")
 
     // To track the force gpu rendering switch state
     private val isForceGpuRenderingEnabled = mutableStateOf(false)
@@ -59,6 +59,16 @@ object GlobalDataManager {
     // Function to get the current state of the switch
     fun getMemoryCleanerState(): Boolean {
         return isMemoryCleanerEnabled.value
+    }
+
+    // Function to update the background app limit
+    fun setSelectedBackgroundAppLimit(limit: String) {
+        selectedBackgroundAppLimit.value = limit
+    }
+
+    // Function to get the background app limit
+    fun getSelectedBackgroundAppLimit(): String {
+        return selectedBackgroundAppLimit.value
     }
 
     // Function to update the switch state

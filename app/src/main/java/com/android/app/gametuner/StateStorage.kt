@@ -15,6 +15,7 @@ class StateStorage(context: Context) {
         private const val APPLY_SETTINGS_SWITCH_STATE_KEY = "apply_settings_switch_state"
         private const val SELECTED_RESOLUTION_KEY = "selected_resolution"
         private const val SELECTED_MEMORY_CLEANER_STATE_KEY = "selected_memory_cleaner"
+        private const val SELECTED_BACKGROUND_APP_LIMIT_KEY = "selected_background_app_limit"
         private const val FORCE_GPU_RENDERING_SWITCH_STATE_KEY = "force_gpu_rendering_switch_state"
     }
 
@@ -88,6 +89,21 @@ class StateStorage(context: Context) {
     // Get memory cleaner switch state
     fun getMemoryCleanerSwitchState(): Boolean {
         return sharedPreferences.getBoolean(SELECTED_MEMORY_CLEANER_STATE_KEY, false)
+    }
+
+    // Save background app limit
+    fun saveBackgroundAppLimit(limit: String) {
+        sharedPreferences.edit().putString(SELECTED_BACKGROUND_APP_LIMIT_KEY, limit).apply()
+    }
+
+    // Get background app limit
+    fun getBackgroundAppLimit(): String {
+        val savedLimit = sharedPreferences.getString(SELECTED_BACKGROUND_APP_LIMIT_KEY, "Default")
+        if (savedLimit == null) {
+            saveBackgroundAppLimit("Default")
+            return "Default"
+        }
+        return savedLimit
     }
 
     // Save switch state

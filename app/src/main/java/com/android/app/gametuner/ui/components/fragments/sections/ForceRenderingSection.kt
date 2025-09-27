@@ -46,7 +46,6 @@ fun ForceRenderingSection() {
         GlobalLogsManager.addLog("Restored/Saved Force GPU Rendering Switch state: ${forceGpuRenderingSwitchState.value}")
     }
 
-
     Row(
         modifier = Modifier
             .fillMaxWidth()

@@ -29,6 +29,7 @@ import com.android.app.gametuner.LocalMainActivity
 import com.android.app.gametuner.StateStorage
 import com.android.app.gametuner.global.GlobalDataManager
 import com.android.app.gametuner.global.GlobalLogsManager
+import com.android.app.gametuner.settings.applyBackgroundAppLimit
 import com.android.app.gametuner.settings.applyForceGpuRendering
 import com.android.app.gametuner.settings.applyMemoryCleaner
 import com.android.app.gametuner.settings.applyResolution
@@ -51,6 +52,9 @@ fun ApplySettingsSection(
 
     // Retrieve the memory cleaner state from GlobalDataManager
     val isMemoryCleanerEnabled = GlobalDataManager.getMemoryCleanerState()
+
+    // Apply Background App Limit
+    val backgroundAppLimit = GlobalDataManager.getSelectedBackgroundAppLimit()
 
     // Retrieve the force gpu rendering switch state from GlobalDataManager
     val isForceGpuRenderingEnabled = GlobalDataManager.getForceGpuRendering()
@@ -141,7 +145,13 @@ fun ApplySettingsSection(
                                 isMemoryCleanerEnabled = isMemoryCleanerEnabled
                             )
 
-                            // Apply Force GPU Rendering
+                            // Apply background app limit
+                            applyBackgroundAppLimit(
+                                isChecked = isChecked,
+                                backgroundAppLimit = backgroundAppLimit
+                            )
+
+                            // Apply force GPU rendering
                             applyForceGpuRendering(
                                 isChecked = isChecked,
                                 isForceGpuRenderingEnabled = isForceGpuRenderingEnabled

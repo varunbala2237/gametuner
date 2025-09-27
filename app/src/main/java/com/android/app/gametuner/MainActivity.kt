@@ -14,8 +14,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import com.android.app.gametuner.shizuku.ShizukuHelper.isShizukuInstalled
-import com.android.app.gametuner.shizuku.ShizukuMissingDialog
-import com.android.app.gametuner.shizuku.ShizukuPermissionDialog
+import com.android.app.gametuner.ui.components.dialogs.ShizukuMissingDialog
+import com.android.app.gametuner.ui.components.dialogs.ShizukuPermissionDialog
 import com.android.app.gametuner.ui.GameTunerApp
 import com.android.app.gametuner.ui.theme.GameTunerTheme
 import rikka.shizuku.Shizuku

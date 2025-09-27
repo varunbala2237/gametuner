@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.android.app.gametuner.global.GlobalDataManager
 import com.android.app.gametuner.LocalMainActivity
 import com.android.app.gametuner.StateStorage
+import com.android.app.gametuner.global.GlobalLogsManager
 import com.android.app.gametuner.ui.utils.getDeviceResolution
 
 @androidx.compose.runtime.Composable
@@ -53,6 +54,7 @@ fun DisplaySettingsSection() {
     // Retrieve the saved resolution list from StateStorage : if empty then initialize default values
     val savedResolutionList = stateStorage.getResolution()
     GlobalDataManager.setSelectedResolutionList(savedResolutionList)
+    GlobalLogsManager.addLog("Restored/Saved Display Resolution value: $savedResolutionList")
 
     // initialize only resolution in dropdown content from stateStorage
     var selectedResolution by remember {

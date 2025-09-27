@@ -30,7 +30,7 @@ fun LogsFragment(modifier: Modifier = Modifier) {
     val log = GlobalLogsManager.getLog()
     val listState = rememberLazyListState() // Scroll state
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
-    val logsHeight = screenHeight * 0.38f
+    val logsHeight = screenHeight * 0.66f
 
     Column(
         modifier = modifier
