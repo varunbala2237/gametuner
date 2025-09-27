@@ -5,4 +5,4 @@
 
 # ⚠️ Warning
 This application is intended **only for testing and personal use**.  
-I am **not responsible for any data loss, performance issues, or hardware damage** caused by the use of this app. Use it at your own risk.
+I am **not responsible for any software issues, data loss, performance issues, or hardware damage** caused by the use of this app. Use it at your own risk.
