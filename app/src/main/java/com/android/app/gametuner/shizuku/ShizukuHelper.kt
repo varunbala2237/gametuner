@@ -9,30 +9,17 @@ import java.io.InputStreamReader
 
 object ShizukuHelper {
 
-    private const val requestPermissionCode = 1001
+    private fun checkPermission(): Boolean {
+        if (Shizuku.isPreV11()) return false // Pre-v11 unsupported
 
-    private fun checkPermission(code: Int): Boolean {
-        return if (Shizuku.isPreV11()) {
-            // Pre-v11 is unsupported
-            false
-        } else {
+        return try {
             when {
-                Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED -> {
-                    // Permission granted
-                    true
-                }
-
-                Shizuku.shouldShowRequestPermissionRationale() -> {
-                    // Users chose "Deny and don't ask again"
-                    false
-                }
-
-                else -> {
-                    // Request permission
-                    Shizuku.requestPermission(code)
-                    false
-                }
+                Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED -> true
+                Shizuku.shouldShowRequestPermissionRationale() -> false
+                else -> false
             }
+        } catch (e: Throwable) {
+            false // binder not ready or any other error
         }
     }
 
@@ -46,11 +33,11 @@ object ShizukuHelper {
     }
 
     fun hasShizukuPermission(): Boolean {
-        return checkPermission(requestPermissionCode)
+        return checkPermission()
     }
 
     fun executeShellCommandWithShizuku(command: String) {
-        if (!checkPermission(requestPermissionCode)) {
+        if (!checkPermission()) {
             GlobalLogsManager.addLog("Shizuku permission not granted: Please grant permission and try again.")
             return
         }

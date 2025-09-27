@@ -62,16 +62,6 @@ object GlobalDataManager {
     }
 
     // Function to update the switch state
-    fun setMaxFps(isEnabled: Boolean) {
-        isMaxFps.value = isEnabled
-    }
-
-    // Function to get the current state of the switch
-    fun getMaxFPs(): Boolean {
-        return isMaxFps.value
-    }
-
-    // Function to update the switch state
     fun setForceGpuRendering(isEnabled: Boolean) {
         isForceGpuRenderingEnabled.value = isEnabled
     }

@@ -1,6 +1,5 @@
-package com.android.app.gametuner.ui.components.fragments.fragcomponents
+package com.android.app.gametuner.ui.components.fragments.sections
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

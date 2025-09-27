@@ -8,14 +8,14 @@ object GlobalLogsManager {
         get() = _logMessages
 
     // Define the maximum log limit
-    private const val MAX_LOG_LINES = 30
+    private const val MAX_LOG_LINES = 500
 
     // Use a mutable state to notify observers
     private val logMessagesState = mutableStateListOf<String>()
 
     fun addLog(log: String) {
         if (_logMessages.size >= MAX_LOG_LINES) {
-            // Clear the previous logs if the limit is reached
+            // Clear the previous log if the limit is reached
             _logMessages.clear()
             logMessagesState.clear()  // Clear state as well
         }
@@ -25,10 +25,10 @@ object GlobalLogsManager {
         logMessagesState.add(log)  // Notify observers
     }
 
-    fun clearLogs() {
+    fun clearLog() {
         _logMessages.clear()
         logMessagesState.clear()  // This will notify observers
     }
 
-    fun getLogs() = logMessagesState.toList()
+    fun getLog() = logMessagesState.toList()
 }

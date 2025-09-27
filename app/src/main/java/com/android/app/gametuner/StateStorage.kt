@@ -16,7 +16,6 @@ class StateStorage(context: Context) {
         private const val SELECTED_RESOLUTION_KEY = "selected_resolution"
         private const val SELECTED_MEMORY_CLEANER_STATE_KEY = "selected_memory_cleaner"
         private const val FORCE_GPU_RENDERING_SWITCH_STATE_KEY = "force_gpu_rendering_switch_state"
-        private const val MAX_FPS_SWITCH_STATE_KEY = "max_fps_switch_state"
     }
 
     // Data class to hold both content and state, including the gameScrollState as Int
@@ -89,16 +88,6 @@ class StateStorage(context: Context) {
     // Get memory cleaner switch state
     fun getMemoryCleanerSwitchState(): Boolean {
         return sharedPreferences.getBoolean(SELECTED_MEMORY_CLEANER_STATE_KEY, false)
-    }
-
-    // Save switch state
-    fun saveMaxFpsSwitchState(isChecked: Boolean) {
-        sharedPreferences.edit().putBoolean(MAX_FPS_SWITCH_STATE_KEY, isChecked).apply()
-    }
-
-    // Get switch state
-    fun getMaxFpsSwitchState(): Boolean {
-        return sharedPreferences.getBoolean(MAX_FPS_SWITCH_STATE_KEY, false)
     }
 
     // Save switch state

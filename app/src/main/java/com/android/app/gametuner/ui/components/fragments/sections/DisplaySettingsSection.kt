@@ -1,4 +1,4 @@
-package com.android.app.gametuner.ui.components.fragments.fragcomponents
+package com.android.app.gametuner.ui.components.fragments.sections
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

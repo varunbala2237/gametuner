@@ -1,4 +1,4 @@
-package com.android.app.gametuner.ui.components.fragments.fragcomponents
+package com.android.app.gametuner.ui.components.fragments.sections
 
 import android.app.AppOpsManager
 import android.content.Context
@@ -16,9 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AutofpsSelect
 import androidx.compose.material.icons.filled.CleaningServices
-import androidx.compose.material.icons.filled.SmartDisplay
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -37,21 +35,24 @@ import com.android.app.gametuner.global.GlobalDataManager
 import com.android.app.gametuner.global.GlobalLogsManager
 
 @androidx.compose.runtime.Composable
-fun MaxFpsSection() {
+fun MemoryCleanerSection() {
     val context = LocalMainActivity.current
     val stateStorage = remember { StateStorage(context) }
+
+    // Check if the device is running Android 10 or above
+    val isAndroid10OrAbove = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
 
     // Access the global apply settings switch state
     val applySettingsEnabled = GlobalDataManager.getApplySettingsState()
 
     // Retrieve the saved memory state
-    val maxFpsSwitchState = rememberSaveable { mutableStateOf(stateStorage.getMemoryCleanerSwitchState()) }
+    val memoryCleanerSwitchState = rememberSaveable { mutableStateOf(stateStorage.getMemoryCleanerSwitchState()) }
 
-    LaunchedEffect(maxFpsSwitchState.value) {
+    LaunchedEffect(memoryCleanerSwitchState.value) {
         // Update the values in GlobalDataManager and stateStorage
-        stateStorage.saveMaxFpsSwitchState(maxFpsSwitchState.value)
-        GlobalDataManager.setMaxFps(maxFpsSwitchState.value)
-        GlobalLogsManager.addLog("Restored/Saved Max FPS Switch state: ${maxFpsSwitchState.value}")
+        stateStorage.saveMemoryCleanerSwitchState(memoryCleanerSwitchState.value)
+        GlobalDataManager.setMemoryCleanerState(memoryCleanerSwitchState.value)
+        GlobalLogsManager.addLog("Restored/Saved Memory Cleaner Switch state: ${memoryCleanerSwitchState.value}")
     }
 
     Row(
@@ -69,8 +70,8 @@ fun MaxFpsSection() {
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                imageVector = Icons.Filled.AutofpsSelect,
-                contentDescription = "Auto FPS Select Icon",
+                imageVector = Icons.Filled.CleaningServices,
+                contentDescription = "Cleaning Services Icon",
                 tint = MaterialTheme.colorScheme.onPrimary
             )
         }
@@ -81,17 +82,47 @@ fun MaxFpsSection() {
                 .padding(horizontal = 16.dp)
         ) {
             Text(
-                text = "Max FPS",
+                text = "Memory Cleaner",
                 style = MaterialTheme.typography.bodyLarge
             )
         }
 
         Switch(
-            checked = maxFpsSwitchState.value,
+            checked = memoryCleanerSwitchState.value,
             onCheckedChange = { isChecked ->
-                maxFpsSwitchState.value = isChecked
+                if (isAndroid10OrAbove) {
+                    // Check if usage access permission is granted
+                    if (isUsageAccessGranted(context)) {
+                        memoryCleanerSwitchState.value = isChecked
+                    } else {
+                        // Inform the user to grant permission
+                        Toast.makeText(context, "Please enable Usage Access to use Memory Cleaner", Toast.LENGTH_LONG).show()
+                        guideUserToSettings(context) // Guide the user to the settings page
+                    }
+                } else {
+                    // Disable the switch if Android version is below 10
+                    Toast.makeText(context, "Memory Cleaner requires Android 10 or above", Toast.LENGTH_LONG).show()
+                }
             },
             enabled = !applySettingsEnabled
         )
     }
+}
+
+fun isUsageAccessGranted(context: Context): Boolean {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        val appOps = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
+        val mode = appOps.unsafeCheckOpNoThrow(
+            AppOpsManager.OPSTR_GET_USAGE_STATS,
+            android.os.Process.myUid(),
+            context.packageName
+        )
+        return mode == AppOpsManager.MODE_ALLOWED
+    }
+    return false
+}
+
+fun guideUserToSettings(context: Context) {
+    val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+    context.startActivity(intent)
 }
