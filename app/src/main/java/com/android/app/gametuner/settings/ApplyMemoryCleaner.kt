@@ -12,7 +12,7 @@ fun applyMemoryCleaner(context: Context, isChecked: Boolean, isMemoryCleanerEnab
 
     // Start or stop memory cleaner service based on switch state
     val serviceIntent = Intent(context, MemoryCleanerService::class.java).apply {
-        putExtra("selectedPackageName", selectedPackage)  // Pass the selected package name as an extra
+        putExtra("selectedPackageName", selectedPackage)  // Pass the selected package
     }
 
     if (isMemoryCleanerEnabled) {
