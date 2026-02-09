@@ -11,13 +11,11 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Smartphone
-import androidx.compose.material.icons.filled.SportsEsports
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -33,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.app.gametuner.ui.components.fragments.DeviceFragment
-import com.android.app.gametuner.ui.components.fragments.GameFragment
 import com.android.app.gametuner.ui.components.fragments.LogsFragment
 import com.android.app.gametuner.ui.utils.darkenSurfaceColor
 import com.android.app.gametuner.ui.utils.lightenSurfaceColor
@@ -97,29 +94,6 @@ fun FragmentSwitcher() {
                     }
                 }
 
-                // Game Tuning Button
-                Button(
-                    onClick = { switchToFragment("Game") },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Transparent, // Transparent background
-                        contentColor = if (currentFragment == "Game") MaterialTheme.colorScheme.primary else Color.Gray
-                    ),
-                    modifier = Modifier
-                        .weight(1f)
-                ) {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        // Icon for Game Tuning
-                        Icon(
-                            imageVector = Icons.Filled.SportsEsports, // Material Icon for Game
-                            contentDescription = "Game Icon",
-                            tint = if (currentFragment == "Game") MaterialTheme.colorScheme.primary else Color.Gray
-                        )
-                    }
-                }
-
                 // Logs Button
                 Button(
                     onClick = { switchToFragment("Logs") },
@@ -153,14 +127,6 @@ fun FragmentSwitcher() {
                 // Device Tuning Fragment (Left)
                 if (currentFragment == "Device") {
                     DeviceFragment(
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
-                }
-
-                // Game Tuning Fragment (Center)
-                if (currentFragment == "Game") {
-                    GameFragment(
                         modifier = Modifier
                             .fillMaxSize()
                     )
