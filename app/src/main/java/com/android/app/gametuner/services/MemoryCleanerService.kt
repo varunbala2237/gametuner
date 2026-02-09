@@ -65,7 +65,7 @@ class MemoryCleanerService : Service() {
                 "Memory Cleaner started for game: $selectedGamePackage"
             )
 
-            // Safe game prioritization (helper handles permission)
+            // Safe game prioritization
             ShizukuHelper.executeShellCommandWithShizuku(
                 "cmd activity set-standby-bucket $selectedGamePackage highest"
             )
@@ -93,7 +93,7 @@ class MemoryCleanerService : Service() {
                 "Memory Cleaner stopped for game: $selectedGamePackage"
             )
 
-            // Restore default bucket (clean exit)
+            // Restore default bucket
             ShizukuHelper.executeShellCommandWithShizuku(
                 "cmd activity set-standby-bucket $selectedGamePackage active"
             )
